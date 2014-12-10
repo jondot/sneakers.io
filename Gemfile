@@ -11,7 +11,7 @@ gem 'nokogiri'
 
 gem 'middleman-blog'
 gem 'middleman-blog-authors'
-gem 'middleman-gh-pages'
+gem 'middleman-deploy'
 gem 'builder'
 gem 'neat'
 gem 'bourbon'
