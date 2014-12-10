@@ -34,14 +34,14 @@ pull request</a> to the `sneakers.io` repo, after adding a markdown post of your
 One thing to note is that we have a custom support for attribution metadata.
 
 
-```yaml
+~~~yaml
 ---
 title: The New Website
 layout: blog
 authors: Dotan Nahum/jondotan@gmail.com
 ---
 
-```
+~~~
 
 You should specify `Your Name/your-email@company.com` and that will
 be picked up and rendered into your <a
@@ -56,7 +56,7 @@ you're happy about it - please feel free to leave your mark.
 
 Just add your own comment block in the `_comments.html.erb` partial:
 
-```html
+~~~html
   <div class="comment">
     <div class="comment-image">
       <img src="<%= gravatar('foobar@gmail.com', 64) %>" alt=""/>
@@ -68,7 +68,7 @@ Just add your own comment block in the `_comments.html.erb` partial:
       </p>
     </div>
   </div>
-```
+~~~
 
 
 

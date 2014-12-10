@@ -86,6 +86,10 @@ activate :authors do |authors|
   authors.author_template = "blog/author.html"
 end
 
+
+activate :syntax
+set :markdown_engine, :kramdown
+
 activate :blog do |blog|
   blog.prefix = "blog"
   blog.tag_template = "blog/tag.html"
@@ -95,9 +99,6 @@ end
 
 page "/blog/feed.xml", layout: false
   # Use relative URLs
-  activate :relative_assets
-  set :relative_links, true
-
 
 # Build-specific configuration
 configure :build do
