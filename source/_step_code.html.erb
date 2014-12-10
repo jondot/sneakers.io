@@ -1,0 +1,10 @@
+class TitleScraper
+  include Sneakers::Worker
+  from_queue 'downloads'
+
+  def work(msg)
+    doc = Nokogiri::HTML(open(msg))
+    worker_trace "FOUND &lt;#{doc.css('title').text}&gt;"
+    ack!
+  end
+end

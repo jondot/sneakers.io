@@ -1,0 +1,91 @@
+---
+title: Sneakers | Performance Background Processing for Ruby
+---
+
+  <section id="hero">
+    <div id="hero-logo">
+      <img src="images/main_logo.png" width="300px" alt="Sneakers - Performance Background Processing For Ruby"/>
+    </div>
+    <h1>Sneakers</h1>
+    <h3 class="sectiontitle">High Performance Backround Jobs. On Ruby.</h3>
+    <a href="http://rubygems.org/gems/sneakers">
+      <img src="https://img.shields.io/gem/v/sneakers.svg" alt="Version"/>
+      <img src="https://img.shields.io/gem/dt/sneakers.svg" alt="Downloads"/>
+    </a>
+  </section>
+
+  <section id="features">
+    <div class="content">
+      <ul class="bullets">
+        <li class="bullet three-col-bullet">
+          <div class="bullet-icon bullet-icon-1">
+            <img src="images/ic_1.png" alt="">
+          </div>
+          <div class="bullet-content">
+            <h4>Performance.</h4>
+            <p>Combined multi-process and multi-threaded processing model maxes out all your cores.</p>
+            </div>
+        </li>
+        <li class="bullet three-col-bullet">
+          <div class="bullet-icon bullet-icon-2">
+            <img src="images/ic_2.png" alt="">
+          </div>
+          <div class="bullet-content">
+            <h4>Workers.</h4>
+            <p>Out of the box worker management, metrics, message handling and more, while being highly configurable and easily extensible.</p>
+          </div>
+        </li>
+        <li class="bullet three-col-bullet">
+          <div class="bullet-icon bullet-icon-3">
+            <img src="images/ic_3.png" alt="">
+          </div>
+          <div class="bullet-content">
+            <h4>RabbitMQ.</h4>
+            <p>We built on RabbitMQ &mdash; a robust, performant and stable queue broker that everyone loves.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
+  <section id="quickstart">
+    <div class="content">
+      <h3 class="sectiontitle">It's as simple as 1-2-3.</h3>
+      <div class="quickstart-steps">
+        <div>1. Install</div>
+        <pre><code class="lang-bash"><%= partial 'step_install' %></code></pre>
+        <div>2. Make a Worker</div>
+        <pre><code class="lang-ruby"><%= partial 'step_code' %></code></pre>
+        <div>3. Run</div>
+        <pre><code><%= partial 'step_run' %></code></pre>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section id="using">
+    <div class="content">
+      <h3 class="sectiontitle">See What People Say</h3>
+      <%= partial 'comments' %>
+      <div class="using-join">
+    Want to join in? <a href="https://github.com/jondot/sneakers.io">Submit a pull request</a>.
+      </div>
+    </div>
+  </section>
+
+
+  <section id="learn">
+    <div class="content">
+      <h3 class="sectiontitle">Our Community Blog &mdash; Learn, Build, Repeat.</h3>
+
+      <div class="articles">
+        <% page_articles.take(6).each_with_index do |article, i| %>
+          <%= partial 'blogitem', :locals => { :article => article } %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+

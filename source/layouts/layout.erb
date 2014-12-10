@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+<link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+    <meta charset="utf-8">
+    
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title><%= current_page.data.title || "The Middleman" %></title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag "app" %>
+  </head>
+  
+  <body class="landing <%= page_classes %>">
+    <%= partial 'nav' %>
+    <%= yield %>
+    <%= partial 'footer' %>
+
+    <%= javascript_include_tag  "app" %>
+    <script>
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        ga('create','UA-7131053-14');ga('send','pageview');
+    </script>
+  </body>
+</html>

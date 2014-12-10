@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+<meta charset="utf-8" />
+<meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+<title>Sneakers Blog <%= ' - ' + current_article.title unless current_article.nil? %></title>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+
+  <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed" %>
+  <%= stylesheet_link_tag "app" %>
+
+</head>
+<body>
+  <%= partial 'nav' %>
+
+  <div class="blog-content">
+    <main class="blog-main">
+      <% unless current_article.nil? %>
+          <%= partial 'article_head', :locals => { :article => current_article } %>
+      <% end %>
+      <%= yield %>
+    </main>
+    <aside class="blog-aside">
+      Want to be featured here?<br/>
+      <a href="https://github.com/jondot/sneakers.io" >Submit a pull request</a>
+      
+      <h4>Recent Articles</h4>
+      <ol class="blog-recent">
+      <% blog.articles[0...10].each do |article| %>
+        <li>
+          <%= link_to article.title, article %>
+        </li>
+      <% end %>
+      </ol>
+      <hr />
+      <h4>Tags</h4>
+      <ol>
+      <% blog.tags.each do |tag, articles| %>
+      <li><%= link_to "#{tag} (#{articles.size})", tag_path(tag) %></li>
+      <% end %>
+      </ol>
+      <h4>By Year</h4>
+      <ol>
+      <% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %>
+      <li><%= link_to "#{year} (#{articles.size})", blog_year_path(year) %></li>
+      <% end %>
+      </ol>
+      <div class="blog-minihero">
+        <hr />
+        <ul class="blog-socials">
+          <li>
+            <a href="http://twitter.com/jondot"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li>
+            <a href="https://github.com/jondot/sneakers"><i class="fa fa-github"></i></a>
+          </li>
+          <li>
+            <a href="/blog/feed.xml"><i class="fa fa-rss"></i></a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+  <%= partial 'footer' %>
+
+  <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-7131053-14');ga('send','pageview');
+  </script>
+</body>
+</html>

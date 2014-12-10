@@ -1,0 +1,23 @@
+<% on_blog = current_page.path.start_with? 'blog/' %>
+
+<header class="navigation">
+  <div class="navigation-wrapper">
+    <div class="navigation-content">
+      <div style="padding:0px">
+        <a href="/" class="logo">
+          <img src="/images/main_logo.png" alt="Logo Image">
+        </a>
+      </div>
+      <a href="" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+      <div class="nav">
+        <ul id="navigation-menu">
+          <li class="nav-link <%= on_blog ? '' : 'selected' %>"><a href="/">Home</a></li>
+          <li class="nav-link <%= on_blog ? 'selected' : '' %>"><a href="/blog">Blog</a></li>
+          <li class="nav-link"><a href="https://github.com/jondot/sneakers/wiki">Docs</a></li>
+          <li class="nav-link">
+          <a class="fork" href="https://github.com/jondot/sneakers"><i class="fa fa-github"></i> Fork on Github &rarr;</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>

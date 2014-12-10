@@ -1,0 +1,8 @@
+<h1 class="article-title"><%= link_to article.title, article %></h1>
+<div class="article_head">
+  <div class="article_head-author">
+    <img src="<%= author_gravatar(article.author_names.first) %>" alt=""/>
+    <a href="<%= author_social(article.author_names.first) %>"><%= author_name(article.author_names.first) %></a>, <%= article.date.strftime('%b %e') %>
+  </div>
+</div>
+
