@@ -82,14 +82,16 @@ ready do
   #sprokets.import_asset 'normalize.css'
 end
 
+activate :authors do |authors|
+  authors.author_template = "blog/author.html"
+end
 
 activate :blog do |blog|
   blog.prefix = "blog"
-  blog.tag_template = "tag.html"
-  blog.calendar_template = "calendar.html"
+  blog.tag_template = "blog/tag.html"
+  blog.calendar_template = "blog/calendar.html"
 end
 
-activate :authors
 
 page "/blog/feed.xml", layout: false
 
