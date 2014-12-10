@@ -18,7 +18,7 @@ and in turn, it can declare what it depends on - like any other software project
 A modular worker is a first-class software project, that can be iterated upon independently and quickly.
 
 
-![](/images/blog/modular_workers-acmeworker.png)
+![](blog/modular_workers-acmeworker.png)
 
 One strategy of creating a modular worker architecture is to extract all your worker code into 2 projects.
 

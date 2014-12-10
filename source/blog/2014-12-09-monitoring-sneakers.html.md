@@ -13,14 +13,14 @@ In this specific use case, each "bundle" may contain several "events", which is 
 
 In itself an important metric to measure, to expose a bad / error prone bulking strategy.
 
-![](/images/blog/events-in-bundle.png)
+![](blog/events-in-bundle.png)
 
 
 A good practice is to always measure the average payload size - the size of a message passed to a worker. Again this is a kind of parameter that may affect job handling time and may expose misconfiguration / errors with original messages.
 
 The size of a message and rate of messages are also useful in computing and monitoring the network capacity and saturation.
 
-![](/images/blog/payload-bytes.png)
+![](blog/payload-bytes.png)
 
 
 #### Monitoring Worker Metrics
@@ -29,16 +29,16 @@ A job's latency is very important. Here you can measure and learn about the prof
 
 This metric along with the CPU's state will help you answer questions such as are jobs I/O bound? are they CPU bound?
 
-![](/images/blog/job-latency.png)
+![](blog/job-latency.png)
 
 Job/sec is the ultimate eyecandy metric; Beyond that, it is also a very useful tool to base any anomaly / spike detection on with your jobs. It's also one of the metrics that you should always find changing - seasonality, peaks, spikes, etc.
 
-![](/images/blog/jobs-sec.png)
+![](blog/jobs-sec.png)
 
 
 Worker errors are errors that aren't handled by any of your code. Very useful for a baseline for monitoring.
 
-![](/images/blog/worker-errors.png)
+![](blog/worker-errors.png)
 
 #### Monitoring RabbitMQ
 
@@ -59,22 +59,22 @@ When you're trying to troubleshoot a sneaky problem, server vitals can increase 
 
 Starting off with CPU, obviously. This is cpu-idle:
 
-![](/images/blog/cpu-idle.png)
+![](blog/cpu-idle.png)
 
 
 Many threads, many processes generate a lot of contention and context switches. You want to be able to visualize the bottlenecks.
 
-![](/images/blog/context-switches.png)
+![](blog/context-switches.png)
 
 
 Ruby processes may become notoriously memory-hungry. This is real free memory:
 
-![](/images/blog/free-mem.png)
+![](blog/free-mem.png)
 
 
 If your worker interacts with the world, it's useful to monitor the amount of open connections. Open connections run out quickly on a high-scale solution. This is open connections:
 
-![](/images/blog/open-web-connections.png)
+![](blog/open-web-connections.png)
 
 #### Conclusion
 
