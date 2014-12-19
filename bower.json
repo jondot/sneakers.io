@@ -3,6 +3,7 @@
   "version": "",
   "dependencies": {
     "normalize-css": "~3.0.2",
-    "highlightjs": "~8.4.0"
+    "highlightjs": "~8.4.0",
+    "jquery": "~2.1.3"
   }
 }
