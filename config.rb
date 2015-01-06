@@ -104,6 +104,8 @@ page "/blog/feed.xml", layout: false
 configure :build do
   # For example, change the Compass output style for deployment
   # activate :minify_css
+  activate :relative_assets
+  set :relative_links, true
 
   # Minify Javascript on build
   # activate :minify_javascript
