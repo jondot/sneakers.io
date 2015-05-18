@@ -6,10 +6,11 @@ authors: Igor Zhivilo/warolv@gmail.com
 
 In the past few months I had the opportunity to work with RabbitMQ and sneakers, implementing different 'job handling strategies' in our production environment and I decided to share this knowledge with you - hoping this may help someone else there.
 I want to share my experience of working with my favorite failure handling strategy called 'maxretry'.
+
 Ok, let's start - from its description: “Maxretry uses dead letter policies on Rabbitmq to requeue and retry messages after failure (rejections, errors and timeouts). When the maximum number of retries is reached it will put the message on an error queue.”
 
-##### Sounds good, so let’s do it—but what does “dead policies” means?
-###### It means messages from a queue can be republished to another exchange when any of the following events occur:
+> Sounds good, so let’s do it—but what does “dead policies” means?
+> It means messages from a queue can be republished to another exchange when any of the following events occur:
 
 * The message is rejected (basic.reject or basic.nack) with requeue=false
 * The TTL for the message expires
@@ -21,57 +22,60 @@ For our configuration, I used a retry number equal to 5, so, in case of failure,
 Ok, let’s write some code, starting with the definition of a worker, which uses a custom handler (maxretry) and not the default (Oneshot).
 
 ##### Sneakers Initializer
-``` ruby 
-  # config/initializers/sneakers.rb
-  require 'sneakers'
-  require 'sneakers/handlers/maxretry'  # you must add handler to this folder
 
-  config_file = File.read(::Rails.root.to_s + '/config/sneakers.yml') 
-  config = YAML.load(config_file)[::Rails.env]
-    .symbolize_keys
-    .merge(handler: Sneakers::Handlers::Maxretry, workers: 3)
-  Sneakers.configure(config)
+~~~ruby
+# config/initializers/sneakers.rb
+require 'sneakers'
+require 'sneakers/handlers/maxretry'  # you must add handler to this folder
 
-  WORKER_OPTIONS = {
-    retry_timeout:      60 * 1000,  #60 sec
-    ack:                true,
-    threads:            10,
-    prefetch:           10,
-    ....
-  }
-``` 
+config_file = File.read(::Rails.root.to_s + '/config/sneakers.yml') 
+config = YAML.load(config_file)[::Rails.env]
+  .symbolize_keys
+  .merge(handler: Sneakers::Handlers::Maxretry, workers: 3)
+Sneakers.configure(config)
+
+WORKER_OPTIONS = {
+  retry_timeout:      60 * 1000,  #60 sec
+  ack:                true,
+  threads:            10,
+  prefetch:           10,
+  ....
+}
+~~~
 
 ##### Configuration for sneakers
-``` ruby 
-  # config/sneakers.yml
-  development:
-    amqp: "amqp://guest:guest@localhost:5672"
-    vhost: "/"
 
-  integration:
-   ....
+~~~ruby
+# config/sneakers.yml
+development:
+  amqp: "amqp://guest:guest@localhost:5672"
+  vhost: "/"
 
-  production:
-    ...
-``` 
+integration:
+ ....
+
+production:
+  ...
+~~~
 
 ##### Creating a worker which defines dead letter policies to resend failing messages
-``` ruby 
-  class MessagesWorker
-    include Sneakers::Worker
 
-    from_queue  'mailer.messages',
-        WORKER_OPTIONS.merge(
-          {:arguments => {:'x-dead-letter-exchange' => 'mailer.messages-retry'}}
-        )
+~~~ruby
+class MessagesWorker
+  include Sneakers::Worker
 
-    def work(message)
-        MyMailer.send_mail(msg).deliver
+  from_queue  'mailer.messages',
+      WORKER_OPTIONS.merge(
+        {:arguments => {:'x-dead-letter-exchange' => 'mailer.messages-retry'}}
+      )
 
-        ack!
-    end
+  def work(message)
+      MyMailer.send_mail(msg).deliver
+
+      ack!
   end
-``` 
+end
+~~~
 
 After running a worker: ‘WORKERS=MessagesWorker rake sneakers:run’, and going to admin:http://localhost:15672, be sure that you see 3 queues created:
 
@@ -96,4 +100,5 @@ For more details, you can look at the [maxretry handler](https://github.com/jond
 * Go to the error queue, click on the “get messages” button and copy this message.
 * Run the rails console and use Base64.decode64 (‘paste your copied message here’).
 
-Hope my experience will help someone, you may see original post in my blog - http://warolv.net/blog/2015/05/16/handling-rabbitmq-consumer-failures-with-maxretry-handler/
+Hope my experience will help someone, you may see [original post in my blog](http://warolv.net/blog/2015/05/16/handling-rabbitmq-consumer-failures-with-maxretry-handler/)
+
