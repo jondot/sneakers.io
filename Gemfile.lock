@@ -39,7 +39,7 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
-    eventmachine (1.0.7)
+    eventmachine (1.2.0.1)
     execjs (2.5.2)
     ffi (1.9.8)
     font-awesome-middleman (4.2.3)
@@ -173,3 +173,6 @@ DEPENDENCIES
   nokogiri
   tzinfo-data
   wdm (~> 0.1.0)
+
+BUNDLED WITH
+   1.11.2
